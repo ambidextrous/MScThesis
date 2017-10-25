@@ -1,0 +1,21 @@
+module TravelAgency;
+
+local protocol at Client BookJourney(role Client, role Aggregator) {
+    GreetAggregator() to Aggregator; 
+    GreetClient() from Aggregator;
+    rec MakeBooking { // Recursive/loop block
+        RequestItinerary(string, int) to Aggregator;
+        ProvideFlightInformation(bool, string) from Aggregator;
+        choice at Client { // Choice block
+            Accept() to Aggregator;
+            RequestPaymentInfo() from Aggregator;
+            ProvidePaymentInto(string) to Aggregator; 
+            ConfirmPayment(bool) from Aggregator;
+        } or {
+            RejectAndLeave() to Aggregator; 
+        } or {
+            TryAgain() to Aggregator;
+            continue MakeBooking; // Recur/Iterate instruction
+        }
+    }
+}

@@ -1,0 +1,13 @@
+// test3_C
+
+module Proto1;
+
+local protocol Proto1 at C(role A, role B, role C) {
+	choice at A {
+		two() from B;
+		three() to A;
+	} or {
+		five() from B;
+		six() to A;
+	}
+}

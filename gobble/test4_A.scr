@@ -1,0 +1,7 @@
+// test4_A
+
+module Proto2;
+
+local protocol Proto2 at A(role A, role B) {
+	oneTwoThree(int, string) to B;
+}

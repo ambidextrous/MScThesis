@@ -1,0 +1,18 @@
+// test5_B
+
+module Proto3;
+
+local protocol Proto3 at B(role A, role B) {
+	rec X {
+		choice at A {
+			one() from A;
+			two() from A;
+			continue X;
+		} or {
+			three() from A;
+		}
+		four() from A;
+	}
+	five() from A;
+}
+

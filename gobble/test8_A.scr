@@ -1,0 +1,12 @@
+// test8_A
+
+module ParallelNotLinear;
+
+local protocol ParallelNotLinear at A(role A, role B, role C) {
+	par {
+		one() to B;
+	} and {
+		three() to B;
+	}
+}
+

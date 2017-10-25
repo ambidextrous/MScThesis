@@ -1,0 +1,48 @@
+// test2_server
+
+module Response;
+
+local protocol Response at Server(role Client, role Server) {
+	HTTPV() to Client;
+	choice at Server {
+		twoHundred_resp() to Client; 
+	} or {
+		fourOfour_resp() to Client;
+	}
+	rec Y {
+		choice at Server {
+			DATE() to Client; 
+			continue Y;
+		} or {
+			SERVER() to Client; 
+			continue Y;
+		} or {
+			STRICTTS() to Client; 
+			continue Y;
+		} or {
+			LASTM() to Client;
+			continue Y;
+		} or {
+			ETAG() to Client; 
+			continue Y;
+		} or {
+			ACCEPTR() to Client;
+			continue Y;
+		} or {
+			CONTENTL() to Client;
+			continue Y;
+		} or {
+			VARY() to Client;
+			continue Y;
+		} or {
+			CONTENTT() to Client;
+			continue Y;
+		} or {
+			VIA() to Client; 
+			continue Y;
+		} or {
+			BODY() to Client; 
+		}
+	}
+}
+

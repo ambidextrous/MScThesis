@@ -1,0 +1,28 @@
+// test7_P
+
+module Negotiate;
+
+local protocol Negotiate at P(role C, role P) {
+	propose(string) from C;
+	rec X {
+		choice at P {
+			accept() to C;
+			confirm() from C;
+		} or {
+			reject() to C;
+		} or {
+			propose(string) to C;
+			choice at C {
+				accept() from C;
+				confirm() to C;
+			} or {
+				reject() from C;
+			} or {
+				propose(int) from C;
+				continue X;
+			}
+		}
+	}
+}
+
+

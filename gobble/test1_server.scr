@@ -1,0 +1,39 @@
+// Protocol 1_server
+
+module Request;
+
+local protocol Request at Server(role Client, role Server) {
+	choice at Client {
+		REQUESTL() from Client; 
+		rec X {
+			choice at Client {
+				HOST() from Client; 
+				continue X;
+			} or {
+				USERA() from Client;  
+				continue X;
+			} or {
+				ACCEPT() from Client;
+				continue X;
+			} or {
+				ACCEPTL() from Client;
+				continue X;
+			} or {
+				ACCEPTE() from Client;  
+				continue X;
+			} or {
+				DNT() from Client;
+				continue X;
+			} or {
+				CONNECTION() from Client;
+				continue X;
+			} or {
+				UPGRADEIR() from Client;
+				continue X;
+			} or {
+				BODY() from Client;
+			}
+		}
+	}
+}
+

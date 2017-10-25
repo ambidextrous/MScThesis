@@ -1,0 +1,28 @@
+module TravelAgency;
+
+local protocol BookJourney at Aggregator(role Client, role Aggregator, role BrutishAirways, role QueasyJet) {
+    GreetAggregator() from Client; 
+    GreetClient() to Client;
+    rec MakeBooking { // Recursive/loop block
+        RequestItinerary(string, int) from Client;
+        par { // Concurrent block
+            CheckAvailabilityAndPrice1(string, int) to BrutishAirways;
+            ConfirmAvailabilityAndPrice1(bool, int) from BrutishAirways;
+        } and {
+            CheckAvailabilityAndPrice2(string, int) to QueasyJet;
+            ConfirmAvailabilityAndPrice2(bool, int) from QueasyJet;
+        }
+        ProvideFlightInformation(bool, string) to Client;
+        choice at Client { // Choice block
+            Accept() from Client;
+            RequestPaymentInfo() to Client;
+            ProvidePaymentInto(string) from Client; 
+            ConfirmPayment(bool) to Client;
+        } or {
+            RejectAndLeave() from Client; 
+        } or {
+            TryAgain() from Client;
+            continue MakeBooking; // Recur/Iterate instruction
+        }
+    }
+}

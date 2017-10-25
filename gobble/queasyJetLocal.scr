@@ -1,0 +1,6 @@
+module TravelAgency;
+
+local protocol at QueasyJet BookJourney(role Aggregator, role QueasyJet) {
+    CheckAvailabilityAndPrice2(string, int) from Aggregator;
+    ConfirmAvailabilityAndPrice2(bool, int) to Aggregator;
+}

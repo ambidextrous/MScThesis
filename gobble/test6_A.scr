@@ -1,0 +1,15 @@
+// test6_A
+
+module Fibonacci;
+
+local protocol Fibonacci at A(role A, role B) {
+	rec Fib {
+		choice at A {
+			fibonacci(int64) to B;
+			fibonacci(int64) from B;
+			continue Fib;
+		} or {
+			stop() to B;
+		}
+	}
+}

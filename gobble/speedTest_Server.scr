@@ -1,0 +1,10 @@
+module SpeedTest;
+
+local protocol SpeedTest at Server(role Client, role Server) {
+    rec loop {
+        firstStep(int) from Client;
+        secondStep(int) to Client;
+        continue loop;
+    }
+}
+
